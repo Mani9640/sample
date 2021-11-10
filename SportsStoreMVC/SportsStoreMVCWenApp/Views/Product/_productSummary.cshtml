@@ -1,0 +1,47 @@
+﻿@model SportsStoreDomainLibrary.Entity.Product
+@{ 
+  var urlPath = Context.Request.Path;
+}
+
+
+<div class="panel-primary">
+  <h3 class="panel-heading"> @Model.ProductName</h3>
+  <div class="panel-body">
+    <h5 style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">@Model.Description</h5>
+    @Model.Price.ToString("c");
+  </div>
+
+  <div class="panel-footer">
+    <div class="row">
+      <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">@urlPath</span>
+
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+        @using (Html.BeginForm("AddToCart", "Cart"))
+        {
+          <input type="hidden" name="productId" value="@Model.ProductId" />
+          <input type="hidden" name="returnurl" value="@urlPath" />
+          <input class="btn btn-primary btn-sm" type="submit" value="Add To Cart" />
+        }
+
+
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+@*<div>
+  <h3>@Model.ProductName</h3>
+  <b>@Model.Description</b>
+  <h4>@Model.Price.ToString("c")</h4>
+
+</div>*@

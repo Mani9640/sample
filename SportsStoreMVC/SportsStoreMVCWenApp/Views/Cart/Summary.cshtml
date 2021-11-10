@@ -1,0 +1,23 @@
+﻿@model SportsStoreDomainLibrary.Entity.Cart 
+@{
+  Layout = null;
+  var lineCount = Model.Lines.Count();
+  var toggle = lineCount == 0 ? "disabled" : "";
+}
+<div style="margin-right:5px;">
+ @if(lineCount>0)
+   {
+    <small class="navbar-text">
+     @Html.ActionLink("Your Cart", "Index", new {returnurl=Request.Url.PathAndQuery},
+      new {@class=""})
+
+     @Model.Lines.Sum(X=>X.Quantity) item(s)
+     @Model.ComputeTotalValue().ToString("c")
+     @Html.ActionLink(" ", "Checkout", new {controller="Cart",action="CheckOut"},
+      new {@class="fa fa-shopping-cart "+toggle})
+
+    </small>
+
+   }
+
+</div>
